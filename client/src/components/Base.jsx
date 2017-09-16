@@ -7,17 +7,17 @@ const Base = ({ children }) => (
   <div>
     <div className="top-bar">
       <div className="top-bar-left">
-        <IndexLink to="/">React App</IndexLink>
+        <IndexLink to="/">Almuerzos</IndexLink>
       </div> 
 
       {Auth.isUserAuthenticated() ? (
         <div className="top-bar-right">
-          <Link to="/logout">Log out</Link>
+          <Link to="/logout">Cerrar sesión</Link>
         </div>
       ) : (
         <div className="top-bar-right">
-          <Link to="/login">Log in</Link>
-          <Link to="/signup">Sign up</Link>
+          <Link to="/login">Iniciar sesión</Link>
+          <Link to="/signup">Crear cuenta</Link>
         </div>
       )}
 

@@ -14,13 +14,13 @@ const SignUpForm = ({
 }) => (
   <Card className="container">
     <form action="/" onSubmit={onSubmit}>
-      <h2 className="card-heading">Sign Up</h2>
+      <h2 className="card-heading">Crear cuenta</h2>
 
       {errors.summary && <p className="error-message">{errors.summary}</p>}
 
       <div className="field-line">
         <TextField
-          floatingLabelText="Name"
+          floatingLabelText="Nombre"
           name="name"
           errorText={errors.name}
           onChange={onChange}
@@ -40,7 +40,7 @@ const SignUpForm = ({
 
       <div className="field-line">
         <TextField
-          floatingLabelText="Password"
+          floatingLabelText="Contraseña"
           type="password"
           name="password"
           onChange={onChange}
@@ -53,7 +53,7 @@ const SignUpForm = ({
         <RaisedButton type="submit" label="Create New Account" primary />
       </div>
 
-      <CardText>Already have an account? <Link to={'/login'}>Log in</Link></CardText>
+      <CardText>¿Ya tienes cuenta? <Link to={'/login'}>Inicia sesión</Link>.</CardText>
     </form>
   </Card>
 );

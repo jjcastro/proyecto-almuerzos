@@ -19,21 +19,21 @@ function validateSignupForm(payload) {
 
   if (!payload || typeof payload.email !== 'string' || !validator.isEmail(payload.email)) {
     isFormValid = false;
-    errors.email = 'Please provide a correct email address.';
+    errors.email = 'Por favor ingresa un correo electrónico válido @uniandes.com.';
   }
 
   if (!payload || typeof payload.password !== 'string' || payload.password.trim().length < 8) {
     isFormValid = false;
-    errors.password = 'Password must have at least 8 characters.';
+    errors.password = 'La contraseña debe tener al menos 8 caracteres.';
   }
 
   if (!payload || typeof payload.name !== 'string' || payload.name.trim().length === 0) {
     isFormValid = false;
-    errors.name = 'Please provide your name.';
+    errors.name = 'Por favor ingresa tu nombre.';
   }
 
   if (!isFormValid) {
-    message = 'Check the form for errors.';
+    message = 'Los datos contienen errores.';
   }
 
   return {
@@ -57,16 +57,16 @@ function validateLoginForm(payload) {
 
   if (!payload || typeof payload.email !== 'string' || payload.email.trim().length === 0) {
     isFormValid = false;
-    errors.email = 'Please provide your email address. It must be a @uniandes.com address.';
+    errors.email = 'Por favor ingresa tu correo electrónico.';
   }
 
   if (!payload || typeof payload.password !== 'string' || payload.password.trim().length === 0) {
     isFormValid = false;
-    errors.password = 'Please provide your password.';
+    errors.password = 'Por favor ingresa tu contraseña.';
   }
 
   if (!isFormValid) {
-    message = 'Check the form for errors.';
+    message = 'Los datos contienen errores.';
   }
 
   return {
@@ -95,16 +95,16 @@ router.post('/signup', (req, res, next) => {
         // the 409 HTTP status code is for conflict error
         return res.status(409).json({
           success: false,
-          message: 'Check the form for errors.',
+          message: 'Los datos contienen errores.',
           errors: {
-            email: 'This email is already taken.'
+            email: 'Este correo electrónico ya ha sido registrado.'
           }
         });
       }
 
       return res.status(400).json({
         success: false,
-        message: 'Could not process the form.'
+        message: 'No se pudieron enviar los datos.'
       });
     }
 
@@ -114,21 +114,20 @@ router.post('/signup', (req, res, next) => {
     let mailOptions = {
       from: '"Almuerzos" <almuerzos@castrovaron.com>', // sender address
       to: req.body.email, // list of receivers
-      subject: 'Hello', // Subject line
-      text: 'Hello world?', // plain text body
-      html: '<b>Hello world?</b>' // html body
+      subject: '¡Bienvenido a almuerzos, ' + req.body.name + '! 🌮🍔', // Subject line
+      html: '<b>Te has registrado exitosamente en almuerzos con el correo: </b><br><i>' + req.body.email + '</i>' // html body
     };
 
     mailer.sendMail(mailOptions, (error, info) => {
       if (error) {
           return console.log(error);
       }
-      console.log('Message sent: %s', info.messageId);
+      console.log('Mensaje enviado: %s', info.messageId);
     });
 
     return res.status(200).json({
       success: true,
-      message: 'You have successfully signed up! Now you should be able to log in.'
+      message: '¡Te has registrado exitosamente! Ya puedes iniciar sesión.'
     });
   })(req, res, next);
 });
@@ -155,14 +154,14 @@ router.post('/login', (req, res, next) => {
 
       return res.status(400).json({
         success: false,
-        message: 'Could not process the form.'
+        message: 'No se pudo enviar los datos.'
       });
     }
 
 
     return res.json({
       success: true,
-      message: 'You have successfully logged in!',
+      message: '¡Has iniciado sesión exitosamente!',
       token,
       user: userData
     });
