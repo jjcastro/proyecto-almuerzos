@@ -5,7 +5,7 @@
   "scripts": {
     "start": "node --use-strict index.js",
     "bundle": "webpack",
-    "postinstall": "npm run bundle"
+    "heroku-postbuild": "webpack -p --config ./webpack.prod.config.js --progress"
   },
   "repository": {
     "type": "git",
