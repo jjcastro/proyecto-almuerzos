@@ -17,7 +17,7 @@ let mailOptions = {
 router.get('/dashboard', (req, res) => {
   console.log(req.decoded);
   res.json({
-    message: "You're authorized to see this secret message."
+    message: "Bienvenido a Almuerzos."
   });
 });
 

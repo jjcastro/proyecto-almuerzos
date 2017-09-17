@@ -23,7 +23,7 @@ module.exports = new PassportLocalStrategy({
     if (err) { return done(err); }
 
     if (!user) {
-      const error = new Error('Incorrect email or password');
+      const error = new Error('Correo o contraseña incorrecto.');
       error.name = 'IncorrectCredentialsError';
 
       return done(error);
@@ -34,7 +34,7 @@ module.exports = new PassportLocalStrategy({
       if (err) { return done(err); }
 
       if (!isMatch) {
-        const error = new Error('Incorrect email or password');
+        const error = new Error('Correo o contraseña incorrecto.');
         error.name = 'IncorrectCredentialsError';
 
         return done(error);

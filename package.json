@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon --use-strict index.js",
+    "start": "node --use-strict index.js",
     "bundle": "webpack"
   },
   "repository": {
@@ -35,6 +35,5 @@
     "babel-preset-react": "^6.16.0",
     "nodemon": "^1.11.0",
     "webpack": "^1.14.0"
-  },
-  "description": ""
+  }
 }
