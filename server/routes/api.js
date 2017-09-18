@@ -1,18 +1,10 @@
 const express = require('express');
 const mailer = require('../nodemailer');
-const User = require('mongoose').model('User');
+const User = require('../models/user');
+const Lunch = require('../models/lunch');
 const config = require('../../config');
 
 const router = new express.Router();
-
-// setup email data with unicode symbols
-let mailOptions = {
-  from: '"Almuerzos" <almuerzos@castrovaron.com>', // sender address
-  to: 'josecastrovaron@gmail.com', // list of receivers
-  subject: 'Hello ✔', // Subject line
-  text: 'Hello world?', // plain text body
-  html: '<b>Hello world?</b>' // html body
-};
 
 router.get('/dashboard', (req, res) => {
   console.log(req.decoded);
@@ -38,17 +30,86 @@ router.get('/me', (req, res) => {
   });
 });
 
-router.get('/send', (req, res) => {
-  // send mail with defined transport object
-  transporter.sendMail(mailOptions, (error, info) => {
-    if (error) {
-        return console.log(error);
+router.post('/lunch', (req, res) => {
+  console.log(req.body);
+  Lunch.findOne({
+    creator: {
+      $ne: req.userId
+    },
+    date: req.body.date,
+    times: {
+      $in: req.body.times
     }
-    console.log('Message sent: %s', info.messageId);
-    // Preview only available when sending through an Ethereal account
-    console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info));
+  }).exec(function(err, lunch) {
+    if (err) return res.send(err);
+    console.log("aa");
+    if (!lunch) {
+      // create a new instance of the User model
+      var newLunch = new Lunch();
+
+      // set the users information (comes from the request)
+      newLunch.creator = req.userId;
+      newLunch.partner = null;
+      newLunch.date = req.body.date;
+      newLunch.times = req.body.times;
+
+      console.log("a");
+      newLunch.save(function(err) {
+        console.log("b");
+        if (err) return res.send(err);
+        console.log("bb");
+        res.json({
+          message: "¡Genial! Si encontramos alguien que se ajuste a tu horario, te lo enviaremos al correo.",
+          found: false
+        });
+      });
+    } else {
+      console.log("c");
+
+      lunch.partner = req.userId;
+      lunch.save(function(err, item) {
+        if (err) return res.send(err);
+
+        Lunch.findOne(item)
+          .populate('creator partner')
+          .exec(function (err, savedLunch) {
+          if (err) return res.send(err);
+
+          // mail options closure
+          let mailOptions = (user, partner) => {
+            return {
+              from: '"Almuerzos" <almuerzos@castrovaron.com>', // sender address
+              to: partner.email, // list of receivers
+              subject: '¡Tu cita de almuerzo!', // Subject line
+              html: `<b>¡Te hemos encontrado una cita para almorzar!</b><br>Escríbele a tu compañero para arreglar detalles:<br>
+                      <ul>
+                        <li><b>Nombre:</b> ` + user.name  + `</li>
+                        <li><b>Correo:</b> ` + user.email + `</li>
+                        <li><b>Día:</b> `    + lunch.date.toLocaleDateString("es-ES") + `</li>
+                      </ul>`
+            };
+          };
+
+          // send mail to creator
+          mailer.sendMail(
+            mailOptions(savedLunch.creator, savedLunch.partner), (error, info) => {
+            if (err) return res.send(err);
+            
+            // send mail to partner
+            mailer.sendMail(
+              mailOptions(savedLunch.partner, savedLunch.creator), (error, info) => {
+              if (err) return res.send(err);
+              
+              res.json({
+                message: "¡Genial! Si encontramos alguien que se ajuste a tu horario, te lo enviaremos al correo.",
+                found: true
+              });
+            });
+          });
+        });
+      });
+    }
   });
-  res.json("yay");
 });
 
 
