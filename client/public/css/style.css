@@ -4,6 +4,10 @@ body {
   font-family: 'din-2014' !important;
 }
 
+.top-bar a {
+  color: #fff;
+}
+
 a {
   color: #51BAD1;
   font-weight: bold;
@@ -20,6 +24,7 @@ a:hover {
 }
 
 .top-bar {
+  background-color: #4276ff;
   padding: 10px 15px;
   margin-bottom: 50px;
 }
@@ -71,4 +76,17 @@ a:hover {
 .success-message {
   padding: 0 16px;
   color: green;
+}
+img {
+    max-height: 120px;
+    max-width: 120px;
+    padding: 2em;
+}
+h4 {
+    padding: 2em;
+}
+h1 {
+    padding-top: 2em;
+    font-family: "Berlin Sans FB", sans-serif !important;
+    font-weight: normal;
 }
