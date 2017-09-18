@@ -30,7 +30,6 @@ const Dashboard = ({
                 {errors.summary && <p className="error-message">{errors.summary}</p>}
 
                 <CardTitle
-                    title="Vamos a encontrar un compañero de almuerzo"
                     subtitle="Por favor, selecciona la hora y el día para continuar."
                 />
                 <CardText>Selecciona el día
@@ -69,6 +68,7 @@ const Dashboard = ({
                     />
                 </CardText>
                 <RaisedButton type="submit" label="Continuar" style={styles.button} primary />
+
             </form>
         </Card>
     </div>
