@@ -72,5 +72,15 @@ a:hover {
   color: green;
 }
 img {
-
+    max-height: 120px;
+    max-width: 120px;
+    padding: 2em;
+}
+h4 {
+    padding: 2em;
+}
+h1 {
+    padding-top: 2em;
+    font-family: "Berlin Sans FB", sans-serif !important;
+    font-weight: normal;
 }
