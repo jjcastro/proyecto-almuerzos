@@ -6,6 +6,28 @@ const config = require('../../config');
 
 const router = new express.Router();
 
+function validateLunchForm(payload) {
+  let isFormValid = true;
+  let message = '';
+
+  if (!payload || !(payload.times instanceof Array) || payload.times.length == 0) {
+    isFormValid = false;
+  }
+
+  if (!payload || !payload.date) {
+    isFormValid = false;
+  }
+
+  if (!isFormValid) {
+    message = 'Los datos contienen errores.';
+  }
+
+  return {
+    success: isFormValid,
+    message,
+  };
+}
+
 router.get('/dashboard', (req, res) => {
   console.log(req.decoded);
   res.json({
@@ -24,6 +46,15 @@ router.get('/me', (req, res) => {
 });
 
 router.post('/lunch', (req, res) => {
+
+  const validationResult = validateLunchForm(req.body);
+  if (!validationResult.success) {
+    return res.status(400).json({
+      success: false,
+      message: validationResult.message
+    });
+  }
+
   console.log(req.body);
   Lunch.findOne({
     creator: {

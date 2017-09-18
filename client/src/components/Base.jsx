@@ -2,12 +2,19 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link, IndexLink } from 'react-router';
 import Auth from '../modules/Auth';
+import FontAwesome from 'react-fontawesome';
+
+const styles = {
+    icon: {
+        marginRight: 15,
+    }
+};
 
 const Base = ({ children }) => (
   <div>
     <div className="top-bar">
       <div className="top-bar-left">
-        <IndexLink to="/">Almuerzos</IndexLink>
+        <IndexLink to="/"><FontAwesome name='cutlery' style={styles.icon} />Comparte Tu Mesa</IndexLink>
       </div> 
 
       {Auth.isUserAuthenticated() ? (
