@@ -15,9 +15,9 @@ a {
   transition: color 0.4s;
 }
 
-a:hover {
+/*a:hover {
   color: #51BAD1;
-}
+}*/
 
 .text-center {
   text-align: center;
