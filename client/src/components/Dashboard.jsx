@@ -15,18 +15,18 @@ const Dashboard = ({ secretData, onSumbit }) => (
     <div>
         <Card className="container">
             <form action="/" onSubmit={onSumbit}>
+                <h2>Vamos a encontrar un compañero de almuerzo</h2>
                 <CardTitle
-                    title="Vamos a encontrar un compañero de almuerzo"
                     subtitle="Por favor, selecciona la hora y el día para continuar."
                 />
-                <CardText>Selecciona el día</CardText>
+                <p>Selecciona el día</p>
                 <DatePicker
                     name="date"
                     hintText="¿Qué día?"
                     defaultDate = {new Date}
                     autoOk={true}
                 />
-                <CardText>Selecciona la hora</CardText>
+                <p>Selecciona la hora</p>
                 <RadioButtonGroup className="times" name="times">
                     <RadioButton
                         value="11:00"
@@ -44,7 +44,7 @@ const Dashboard = ({ secretData, onSumbit }) => (
                         style={styles.radioButton}
                     />
                 </RadioButtonGroup>
-                <RaisedButton type="submit" label="Continuar" primary />
+                <RaisedButton className="btn" type="submit" label="Continuar" primary />
             </form>
         </Card>
     </div>
