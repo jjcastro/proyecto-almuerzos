@@ -19,14 +19,15 @@ const Dashboard = ({ secretData, onSumbit }) => (
                     title="Vamos a encontrar un compañero de almuerzo"
                     subtitle="Por favor, selecciona la hora y el día para continuar."
                 />
-                <h3>Selecciona el día</h3>
+                <CardText>Selecciona el día</CardText>
                 <DatePicker
+                    name="date"
                     hintText="¿Qué día?"
                     defaultDate = {new Date}
                     autoOk={true}
                 />
-                <h3>Selecciona la hora</h3>
-                <RadioButtonGroup className="time" >
+                <CardText>Selecciona la hora</CardText>
+                <RadioButtonGroup className="times" name="times">
                     <RadioButton
                         value="time1"
                         label="11:00 - 12:30"
@@ -50,6 +51,7 @@ const Dashboard = ({ secretData, onSumbit }) => (
 );
 
 Dashboard.propTypes = {
+    onSubmit: PropTypes.func.isRequired,
     secretData: PropTypes.string.isRequired
 };
 
