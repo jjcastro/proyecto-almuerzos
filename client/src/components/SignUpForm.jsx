@@ -50,7 +50,7 @@ const SignUpForm = ({
       </div>
 
       <div className="button-line">
-        <RaisedButton type="submit" label="Create New Account" primary />
+        <RaisedButton type="submit" label="Crear cuenta" primary />
       </div>
 
       <CardText>¿Ya tienes cuenta? <Link to={'/login'}>Inicia sesión</Link>.</CardText>
