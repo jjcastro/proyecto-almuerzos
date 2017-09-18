@@ -9,14 +9,14 @@ body {
 }
 
 a {
-  color: red;
+  color: #e1e1e1;
   font-weight: bold;
   text-decoration: none;
   transition: color 0.4s;
 }
 
 a:hover {
-  color: #1976d2;
+  color: #26d262;
 }
 
 .text-center {
@@ -24,6 +24,7 @@ a:hover {
 }
 
 .top-bar {
+  background-color: #4276ff;
   padding: 10px 15px;
   margin-bottom: 50px;
 }
@@ -69,4 +70,7 @@ a:hover {
 .success-message {
   padding: 0 16px;
   color: green;
+}
+img {
+
 }

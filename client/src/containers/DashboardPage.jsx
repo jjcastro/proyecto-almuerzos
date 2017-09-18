@@ -14,6 +14,7 @@ class DashboardPage extends React.Component {
     this.state = {
       secretData: ''
     };
+    this.processDashBoardForm = this.processDashBoardForm.bind(this);
   }
 
   /**
@@ -36,11 +37,38 @@ class DashboardPage extends React.Component {
     xhr.send();
   }
 
+    /**
+     * Post lunch's date and time
+     * @param event
+     */
+    processDashBoardForm(event) {
+
+        event.preventDefault();
+
+        const date = event.target.date;
+        const time = event.target.times;
+        const formData = `date=${date}&times=${time}`;
+
+        // create an AJAX request
+        const xhr = new XMLHttpRequest();
+        xhr.open('post', '/api/lunch');
+        xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+        xhr.responseType = 'json';
+        xhr.addEventListener('load', function () {
+            if (xhr.status === 200) {
+                this.setState({
+                    secretData: xhr.response.message
+                });
+            }
+        });
+        xhr.send(formData);
+    }
+
   /**
    * Render the component.
    */
   render() {
-    return (<Dashboard secretData={this.state.secretData} />);
+    return (<Dashboard secretData={this.state.secretData} onSumbit={this.processDashBoardForm} />);
   }
 
 }

@@ -29,17 +29,17 @@ const Dashboard = ({ secretData, onSumbit }) => (
                 <CardText>Selecciona la hora</CardText>
                 <RadioButtonGroup className="times" name="times">
                     <RadioButton
-                        value="time1"
+                        value="11:00"
                         label="11:00 - 12:30"
                         style={styles.radioButton}
                     />
                     <RadioButton
-                        value="time2"
+                        value="12:30"
                         label="12:30 - 2:00"
                         style={styles.radioButton}
                     />
                     <RadioButton
-                        value="time3"
+                        value="2:00"
                         label="2:00 - 3:30"
                         style={styles.radioButton}
                     />
@@ -51,7 +51,7 @@ const Dashboard = ({ secretData, onSumbit }) => (
 );
 
 Dashboard.propTypes = {
-    onSubmit: PropTypes.func.isRequired,
+    onSubmit: PropTypes.func ,
     secretData: PropTypes.string.isRequired
 };
 
