@@ -15,10 +15,6 @@ a {
   transition: color 0.4s;
 }
 
-/*a:hover {
-  color: #51BAD1;
-}*/
-
 .text-center {
   text-align: center;
 }
@@ -77,14 +73,17 @@ a {
   padding: 0 16px;
   color: green;
 }
+
 img {
     max-height: 120px;
     max-width: 120px;
     padding: 2em;
 }
+
 h4, .times {
     padding: 2em;
 }
+
 h1, h2 {
     padding-top: 2em;
     font-family: "Berlin Sans FB", sans-serif !important;
